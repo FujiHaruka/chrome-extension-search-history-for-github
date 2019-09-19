@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "GitHub history omnibox",
   "omnibox": {
-    "keyword": "gh"
+    "keyword": "git"
   },
   "short_name": "GitHub history omnibox",
   "version": "0.0.0",
