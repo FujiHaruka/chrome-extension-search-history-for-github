@@ -26,10 +26,22 @@ const toSuggestion = (item: {
   }
 }
 
+const Actions = ['_new', '_edit', 'new']
+
+const ignoreAction = (suggestions: chrome.omnibox.SuggestResult) => {
+  const lastPath = suggestions.content.split('/').pop() || ''
+  return !Actions.includes(lastPath)
+}
+
 const uniqByContent = (suggestions: chrome.omnibox.SuggestResult[]) =>
   uniqBy(suggestions, 'content')
 
 export const historyItemsToSuggestions = (
   items: chrome.history.HistoryItem[],
 ): chrome.omnibox.SuggestResult[] =>
-  uniqByContent(items.filter(isGitHub).map(toSuggestion))
+  uniqByContent(
+    items
+      .filter(isGitHub)
+      .map(toSuggestion)
+      .filter(ignoreAction),
+  )

@@ -1,18 +1,16 @@
-import { SuggestWithDefault } from './helpers/SuggestWithDefault'
+import { SuggestionStore } from './helpers/SuggestionStore'
 import { historyItemsToSuggestions } from './helpers/historyItemsToSuggestions'
 import { LazySearch } from './helpers/lazySearch'
 
-const {
-  onInputStarted,
-  onInputChanged,
-  onInputEntered,
-  onInputCancelled,
-} = chrome.omnibox
+const { onInputStarted, onInputChanged, onInputEntered } = chrome.omnibox
 
 const lazySearch = new LazySearch()
-const suggestWithDefault = new SuggestWithDefault()
+const suggestionsStore = new SuggestionStore()
 
-onInputStarted.addListener(() => {})
+onInputStarted.addListener(() => {
+  suggestionsStore.currentSuggestions = []
+})
+
 onInputChanged.addListener((text, suggest) => {
   lazySearch.searchRequest(
     {
@@ -22,19 +20,18 @@ onInputChanged.addListener((text, suggest) => {
     },
     (historyItems) => {
       const suggestions = historyItemsToSuggestions(historyItems)
-      suggestWithDefault.doSuggest(suggest, suggestions)
+        .sort((a, b) => a.content.length - b.content.length)
+        .slice(0, 6)
+      suggestionsStore.suggestWithDefault(suggest, suggestions)
     },
   )
 })
+
 onInputEntered.addListener((text, disposition) => {
-  const suggestion = suggestWithDefault.matchCurrentSuggestion(text)
+  const suggestion = suggestionsStore.matchCurrentSuggestion(text)
   if (suggestion) {
     chrome.tabs.create({
       url: 'https://github.com/' + suggestion.content,
     })
   }
-})
-
-onInputCancelled.addListener(() => {
-  suggestWithDefault.currentSuggestions = []
 })

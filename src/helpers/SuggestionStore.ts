@@ -1,8 +1,8 @@
-export class SuggestWithDefault {
+export class SuggestionStore {
   currentSuggestions: chrome.omnibox.SuggestResult[] = []
 
-  doSuggest(
-    suggest: (suggestions: chrome.omnibox.SuggestResult[]) => void,
+  suggestWithDefault(
+    suggestCallback: (suggestions: chrome.omnibox.SuggestResult[]) => void,
     suggestions: chrome.omnibox.SuggestResult[],
   ) {
     this.currentSuggestions = suggestions
@@ -10,13 +10,13 @@ export class SuggestWithDefault {
       chrome.omnibox.setDefaultSuggestion({
         description: '<dim>no matching results with</dim>',
       })
-      suggest([])
+      suggestCallback([])
       return
     }
     chrome.omnibox.setDefaultSuggestion({
       description: suggestions[0].description,
     })
-    suggest(suggestions.slice(1))
+    suggestCallback(suggestions.slice(1))
   }
 
   matchCurrentSuggestion(text: string) {
