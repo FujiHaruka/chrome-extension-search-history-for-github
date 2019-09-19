@@ -1,13 +1,20 @@
 {
   "manifest_version": 2,
-  "name": "Search GitHub pages in your browser history",
+  "name": "GitHub history omnibox",
   "omnibox": {
     "keyword": "gh"
   },
-  "short_name": "Search GitHub pages",
+  "short_name": "GitHub history omnibox",
   "version": "0.0.0",
-  "default_locale": "en",
-  "description": "You can search GitHub pages in your browser history",
+  "permissions": [
+    "history"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "description": "You can search GitHub history in the omnibox",
   "icons": {
     "16": "assets/icons/icon16.png"
   }

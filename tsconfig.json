@@ -7,7 +7,7 @@
       "dom",
       "es2019"
     ],
-    "types": ["@types/chrome"],
+    "types": ["@types/node", "@types/chrome"],
     "jsx": "react",
     "alwaysStrict": true,
     "noImplicitAny": true,
