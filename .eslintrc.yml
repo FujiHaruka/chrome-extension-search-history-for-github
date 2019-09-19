@@ -1,0 +1,12 @@
+extends:
+  - plugin:@typescript-eslint/recommended
+  - plugin:@typescript-eslint/eslint-recommended
+  - plugin:prettier/recommended
+  - prettier/@typescript-eslint
+parser: "@typescript-eslint/parser"
+plugins:
+  - "@typescript-eslint"
+rules:
+  "@typescript-eslint/explicit-function-return-type": off
+env:
+  browser: true
