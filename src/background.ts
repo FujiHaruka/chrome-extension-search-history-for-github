@@ -10,6 +10,7 @@ const {
 } = chrome.omnibox
 
 const lazySearch = new LazySearch()
+const suggestWithDefault = new SuggestWithDefault()
 
 onInputStarted.addListener(() => {})
 onInputChanged.addListener((text, suggest) => {
@@ -21,12 +22,19 @@ onInputChanged.addListener((text, suggest) => {
     },
     (historyItems) => {
       const suggestions = historyItemsToSuggestions(historyItems)
-      const suggestWithDefault = SuggestWithDefault(suggest)
-      suggestWithDefault(suggestions)
+      suggestWithDefault.doSuggest(suggest, suggestions)
     },
   )
 })
-onInputEntered.addListener(() => {})
+onInputEntered.addListener((text, disposition) => {
+  const suggestion = suggestWithDefault.matchCurrentSuggestion(text)
+  if (suggestion) {
+    chrome.tabs.create({
+      url: 'https://github.com/' + suggestion.content,
+    })
+  }
+})
+
 onInputCancelled.addListener(() => {
-  // resetDefaultSuggestion()
+  suggestWithDefault.currentSuggestions = []
 })

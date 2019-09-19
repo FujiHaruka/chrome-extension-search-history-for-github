@@ -8,7 +8,12 @@ interface StrictHistoryItem extends chrome.history.HistoryItem {
 const isGitHub = (
   item: chrome.history.HistoryItem,
 ): item is StrictHistoryItem =>
-  Boolean(item.url && item.title && new URL(item.url).hostname === 'github.com')
+  Boolean(
+    item.url &&
+      item.title &&
+      new URL(item.url).pathname.length > 1 &&
+      new URL(item.url).hostname === 'github.com',
+  )
 
 const toSuggestion = (item: {
   url: string

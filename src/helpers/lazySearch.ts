@@ -11,7 +11,10 @@ export class LazySearch {
     clearTimeout(this.timer)
     this.timer = setTimeout(() => {
       console.log('Search history:', query.text)
-      chrome.history.search(query, callback)
+      chrome.history.search(query, (results) => {
+        console.log(`Found ${results.length} items for query "${query.text}"`)
+        callback(results)
+      })
     }, this.delay) as any
   }
 }
