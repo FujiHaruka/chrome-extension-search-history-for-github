@@ -1,8 +1,8 @@
 {
-  "name": "chrome-extention-github-access",
+  "name": "chrome-extention-search-history-for-github",
   "author": "FujiHaruka",
   "bugs": {
-    "url": "https://github.com/FujiHaruka/chrome-extention-github-access/issues"
+    "url": "https://github.com/FujiHaruka/chrome-extention-search-history-for-github/issues"
   },
   "dependencies": {
     "@types/chrome": "0.0.88",
@@ -23,12 +23,12 @@
     "eslint-plugin-prettier": "^3.1.0",
     "prettier": "^1.16.4"
   },
-  "homepage": "https://github.com/FujiHaruka/chrome-extention-github-access#readme",
+  "homepage": "https://github.com/FujiHaruka/chrome-extention-search-history-for-github#readme",
   "license": "MIT",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FujiHaruka/chrome-extention-github-access.git"
+    "url": "git+https://github.com/FujiHaruka/chrome-extention-search-history-for-github.git"
   },
   "scripts": {
     "build": "webpack",

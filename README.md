@@ -1,3 +1,3 @@
-# chrome-extention-github-access
+# chrome-extention-search-history-for-github
 
-Chrome extenstion to jump to issues in your GitHub repositories.
+Chrome extension to search browser history for GitHub URL.
