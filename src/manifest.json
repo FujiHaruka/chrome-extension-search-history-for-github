@@ -1,13 +1,14 @@
 {
   "manifest_version": 2,
-  "name": "Jump to issues in your GitHub repositories",
-  "short_name": "Jump to issues",
+  "name": "Search GitHub pages in your browser history",
+  "omnibox": {
+    "keyword": "gh"
+  },
+  "short_name": "Search GitHub pages",
   "version": "0.0.0",
   "default_locale": "en",
-  "description": "You can search such as issues or pull requests in your repositories",
+  "description": "You can search GitHub pages in your browser history",
   "icons": {
-    "16": "images/icons/icon16.png",
-    "48": "images/icons/icon48.png",
-    "128": "images/icons/icon128.png"
+    "16": "assets/icons/icon16.png"
   }
 }

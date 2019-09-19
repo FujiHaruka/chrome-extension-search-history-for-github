@@ -5,6 +5,8 @@
     "url": "https://github.com/FujiHaruka/chrome-extention-github-access/issues"
   },
   "dependencies": {
+    "@types/chrome": "0.0.88",
+    "copy-webpack-plugin": "^5.0.4",
     "ts-loader": "^6.1.0",
     "typescript": "^3.6.3",
     "webpack": "^4.40.2",
