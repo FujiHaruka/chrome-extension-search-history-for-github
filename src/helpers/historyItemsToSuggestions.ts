@@ -5,6 +5,8 @@ interface StrictHistoryItem extends chrome.history.HistoryItem {
   title: string
 }
 
+type SuggestResult = chrome.omnibox.SuggestResult
+
 const isGitHub = (
   item: chrome.history.HistoryItem,
 ): item is StrictHistoryItem =>
@@ -15,10 +17,7 @@ const isGitHub = (
       new URL(item.url).hostname === 'github.com',
   )
 
-const toSuggestion = (item: {
-  url: string
-  title: string
-}): chrome.omnibox.SuggestResult => {
+const toSuggestion = (item: { url: string; title: string }): SuggestResult => {
   const pathname = new URL(item.url).pathname.slice(1) // Remove first '/'
   return {
     content: pathname,
@@ -28,20 +27,25 @@ const toSuggestion = (item: {
 
 const Actions = ['_new', '_edit', 'new']
 
-const ignoreAction = (suggestions: chrome.omnibox.SuggestResult) => {
+const ignoreAction = (suggestions: SuggestResult) => {
   const lastPath = suggestions.content.split('/').pop() || ''
   return !Actions.includes(lastPath)
 }
 
-const uniqByContent = (suggestions: chrome.omnibox.SuggestResult[]) =>
+const uniqByContent = (suggestions: SuggestResult[]) =>
   uniqBy(suggestions, 'content')
+
+const compareByDepth = (a: SuggestResult, b: SuggestResult) =>
+  a.content.split('/').length - b.content.split('/').length
 
 export const historyItemsToSuggestions = (
   items: chrome.history.HistoryItem[],
-): chrome.omnibox.SuggestResult[] =>
+): SuggestResult[] =>
   uniqByContent(
     items
       .filter(isGitHub)
       .map(toSuggestion)
       .filter(ignoreAction),
   )
+    .sort(compareByDepth)
+    .slice(0, 6)

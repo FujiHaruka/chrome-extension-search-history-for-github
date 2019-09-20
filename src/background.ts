@@ -20,8 +20,6 @@ onInputChanged.addListener((text, suggest) => {
     },
     (historyItems) => {
       const suggestions = historyItemsToSuggestions(historyItems)
-        .sort((a, b) => a.content.length - b.content.length)
-        .slice(0, 6)
       suggestionsStore.suggestWithDefault(suggest, suggestions)
     },
   )
