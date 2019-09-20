@@ -34,6 +34,6 @@
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack -w",
-    "zip": "zip -r chrome-extention-github-access.zip build"
+    "zip": "zip -r extenstion.zip build"
   }
 }
