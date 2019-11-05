@@ -1,4 +1,4 @@
-# chrome-extention-search-history-for-github
+# chrome-extension-search-history-for-github
 
 ![icon](./src/assets/icons/icon128.png)
 
